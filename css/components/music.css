@@ -25,3 +25,17 @@
     height: 113px;
     border: 0;
 }
+
+@media (max-width: 480px) {
+    .music {
+        right: 8px;
+        bottom: 8px;
+        width: 128px;
+        border-radius: 8px;
+    }
+
+    .music iframe {
+        width: 128px;
+        height: 72px;
+    }
+}
