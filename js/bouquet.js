@@ -6,6 +6,10 @@ const violetBouquet = {
         COVER_HINT: 'Pulsa para descubrirlo',
         COVER_BUTTON: 'Abrir',
         COVER_LEAVE_ANIMATION: 'cover-leave',
+        YOUTUBE_API_URL: 'https://www.youtube.com/iframe_api',
+        YOUTUBE_HOST: 'https://www.youtube-nocookie.com',
+        // Manzanita - Un ramito de violetas (audio remasterizado)
+        YOUTUBE_VIDEO_ID: 'kXpCmeGBIGk',
         STAR_COUNT: 45,
         RAIN_COUNT: 22,
         RAIN_START_S: 3.8,
@@ -32,6 +36,8 @@ const violetBouquet = {
 
     globals: {
         isOpen: false,
+        player: null,
+        isPlayerReady: false,
     },
 
     elements: {
@@ -39,17 +45,21 @@ const violetBouquet = {
         cover: '.cover',
         btnOpen: '.cover__button',
         messageTitle: '.message__title',
+        music: '.music',
+        musicPlayerId: 'music-player',
     },
 
     /**
-     * Pinta el cielo y la portada y engancha los eventos.
+     * Pinta el cielo, la portada y el reproductor y engancha los eventos.
      */
     init() {
         const self = violetBouquet;
 
         self.renderStars();
         self.renderCover();
+        self.renderMusic();
         self.listeners();
+        self.loadYouTubeApi();
     },
 
     /**
@@ -87,6 +97,52 @@ const violetBouquet = {
         globals.isOpen = true;
         document.querySelector(elements.btnOpen).disabled = true;
         document.querySelector(elements.cover).classList.add('cover--leaving');
+        document.querySelector(elements.music).classList.add('music--visible');
+
+        // Llamarlo dentro del clic es lo que permite sonar con audio en móvil.
+        if (globals.isPlayerReady) {
+            globals.player.playVideo();
+        }
+    },
+
+    /**
+     * Carga la API de YouTube, que avisa con onYouTubeIframeAPIReady.
+     */
+    loadYouTubeApi() {
+        const self = violetBouquet;
+        const script = document.createElement('script');
+
+        window.onYouTubeIframeAPIReady = function () {
+            self.createPlayer();
+        };
+        script.src = self.constants.YOUTUBE_API_URL;
+        document.head.appendChild(script);
+    },
+
+    /**
+     * Crea el reproductor de la canción; si ya se abrió el ramo, empieza a sonar.
+     */
+    createPlayer() {
+        const self = violetBouquet;
+        const { constants, elements, globals } = self;
+
+        globals.player = new YT.Player(elements.musicPlayerId, {
+            host: constants.YOUTUBE_HOST,
+            videoId: constants.YOUTUBE_VIDEO_ID,
+            playerVars: {
+                playsinline: 1,
+                rel: 0,
+            },
+            events: {
+                onReady() {
+                    globals.isPlayerReady = true;
+
+                    if (globals.isOpen) {
+                        globals.player.playVideo();
+                    }
+                },
+            },
+        });
     },
 
     /**
@@ -131,6 +187,18 @@ const violetBouquet = {
                 <button type="button" class="cover__button">${constants.COVER_BUTTON}</button>
             </div>
         </section>`);
+    },
+
+    /**
+     * Pinta el hueco del reproductor, oculto hasta que se abre el ramo.
+     */
+    renderMusic() {
+        const self = violetBouquet;
+        const { elements } = self;
+
+        document.querySelector(elements.app).insertAdjacentHTML('beforeend', `<aside class="music" aria-label="Canción">
+            <div id="${elements.musicPlayerId}"></div>
+        </aside>`);
     },
 
     /**

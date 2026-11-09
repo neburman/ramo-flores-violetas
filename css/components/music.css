@@ -1,0 +1,27 @@
+.music {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 4;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 .6rem 1.6rem rgba(0, 0, 0, .5), 0 0 0 1px rgba(214, 180, 255, .25);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(1rem);
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+.music--visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+}
+
+.music iframe {
+    display: block;
+    width: 200px;
+    height: 113px;
+    border: 0;
+}
