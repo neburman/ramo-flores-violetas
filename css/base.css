@@ -1,0 +1,48 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--night);
+    background-image: radial-gradient(ellipse at 50% 35%, var(--night-soft) 0%, var(--night) 70%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+}
+
+#app {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+@keyframes pop {
+    to {
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+    }
+
+    .petal-rain {
+        display: none;
+    }
+}

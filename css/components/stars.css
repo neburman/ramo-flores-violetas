@@ -1,0 +1,29 @@
+.stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: #fff;
+    opacity: .2;
+    box-shadow: 0 0 6px 1px rgba(214, 180, 255, .6);
+    animation: twinkle var(--t) ease-in-out var(--d) infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: .15;
+    }
+
+    to {
+        opacity: .9;
+    }
+}

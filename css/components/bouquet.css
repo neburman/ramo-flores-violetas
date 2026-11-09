@@ -1,0 +1,330 @@
+.scene {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 24px 16px;
+}
+
+/* ═══ Mensaje ═══ */
+
+.message {
+    text-align: center;
+    animation: message-in 1.2s ease-out var(--t-message) both;
+}
+
+.message__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 400;
+    text-shadow: 0 0 18px rgba(190, 140, 255, .6);
+}
+
+.message__title:focus {
+    outline: none;
+}
+
+.message__text {
+    margin: .4rem 0 0;
+    font-size: 1rem;
+    opacity: .8;
+}
+
+/* ═══ Ramo: todas las medidas en em para escalarlo con font-size ═══ */
+
+.bouquet {
+    position: relative;
+    flex-shrink: 0;
+    width: 34em;
+    height: 44em;
+    font-size: 9px;
+}
+
+@media (max-height: 600px) {
+    .bouquet {
+        font-size: 7px;
+    }
+}
+
+@media (min-width: 640px) and (min-height: 760px) {
+    .bouquet {
+        font-size: 11px;
+    }
+}
+
+/* ═══ Papel ═══ */
+
+.wrap {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    animation: wrap-in .9s ease-out var(--t-wrap) both;
+}
+
+.wrap--back {
+    z-index: 1;
+    width: 30em;
+    height: 24em;
+    margin-left: -15em;
+    background: linear-gradient(180deg, var(--paper-back), var(--paper-back-dark));
+    clip-path: polygon(4% 0, 96% 0, 60% 100%, 40% 100%);
+}
+
+.wrap--front {
+    z-index: 5;
+    width: 27em;
+    height: 19em;
+    margin-left: -13.5em;
+    background: linear-gradient(100deg, var(--paper-shade) 0%, var(--paper) 35%, var(--paper) 55%, var(--paper-shade) 100%);
+    clip-path: polygon(0 0, 50% 20%, 100% 0, 61% 100%, 39% 100%);
+}
+
+/* ═══ Tallos y hojas ═══ */
+
+.stem {
+    position: absolute;
+    left: 50%;
+    bottom: 6em;
+    z-index: 2;
+    width: .4em;
+    height: var(--h);
+    margin-left: -.2em;
+    border-radius: .2em;
+    background: linear-gradient(90deg, var(--stem-dark), var(--stem) 60%, var(--stem-dark));
+    transform-origin: 50% 100%;
+    transform: rotate(var(--rot)) scaleY(0);
+    animation: stem-grow var(--t-stem) ease-out var(--delay) forwards;
+}
+
+.leaf {
+    position: absolute;
+    left: 50%;
+    bottom: var(--y);
+    width: 3em;
+    height: 1.2em;
+    border-radius: 0 100% 0 100%;
+    background: linear-gradient(90deg, var(--stem), var(--leaf));
+    transform-origin: 0 50%;
+    transform: rotate(var(--ang)) scale(0);
+    animation: leaf-open .6s ease-out calc(var(--delay) + var(--t-stem) * .6) forwards;
+}
+
+/* ═══ Flores ═══ */
+
+.flower {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 1;
+    width: 0;
+    height: 0;
+}
+
+.petal {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: var(--pw);
+    height: var(--ph);
+    margin-left: calc(var(--pw) * -.5);
+    border-radius: 50% 50% 45% 45% / 65% 65% 35% 35%;
+    background: radial-gradient(ellipse at 50% 90%, var(--c2) 0%, var(--c1) 75%);
+    box-shadow: inset 0 0 .4em rgba(255, 255, 255, .25);
+    transform-origin: 50% 100%;
+    transform: rotate(var(--a)) scale(0);
+    animation: petal-open .7s var(--ease-pop) calc(var(--delay) + var(--t-bloom) + var(--i) * .06s) forwards;
+}
+
+.flower__center {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--cs);
+    height: var(--cs);
+    margin: calc(var(--cs) * -.5) 0 0 calc(var(--cs) * -.5);
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, var(--gold-light), var(--gold) 40%, var(--gold-dark) 100%);
+    transform: scale(0);
+    animation: pop .5s var(--ease-pop) calc(var(--delay) + var(--t-bloom) + .4s) forwards;
+}
+
+.flower--daisy {
+    --pw: 1.3em;
+    --ph: 3.4em;
+    --cs: 2em;
+}
+
+.flower--anemone {
+    --pw: 3.2em;
+    --ph: 3.6em;
+    --cs: 2em;
+}
+
+.flower--anemone .flower__center {
+    background: radial-gradient(circle, var(--night-soft) 0 45%, var(--night) 70%);
+    box-shadow: 0 0 0 .3em rgba(18, 7, 31, .35);
+}
+
+.flower--violet {
+    --pw: 3em;
+    --ph: 3.4em;
+    --cs: 1.2em;
+}
+
+.flower--lila {
+    --c1: #dcbcff;
+    --c2: #9b5de5;
+}
+
+.flower--violeta {
+    --c1: #b07ef7;
+    --c2: #5b2a9e;
+}
+
+.flower--morado {
+    --c1: #9447d8;
+    --c2: #3d1270;
+}
+
+.flower--orquidea {
+    --c1: #eba2ef;
+    --c2: #a03bb0;
+}
+
+.flower--lavanda {
+    --c1: #ece0ff;
+    --c2: #a985e6;
+}
+
+/* ═══ Espigas de lavanda ═══ */
+
+.spike {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 0;
+    height: 0;
+}
+
+.bud {
+    position: absolute;
+    left: 0;
+    bottom: calc(var(--i) * .8em - 1em);
+    width: 1em;
+    height: 1.6em;
+    margin-left: -.5em;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 40% 30%, #ece0ff, #8f63d9 70%);
+    transform-origin: 50% 100%;
+    transform: rotate(var(--tilt)) scale(0);
+    animation: bud-open .5s var(--ease-pop) calc(var(--delay) + var(--t-bloom) + var(--i) * .07s) forwards;
+}
+
+/* ═══ Lazo ═══ */
+
+.bow {
+    position: absolute;
+    left: 50%;
+    bottom: 6.5em;
+    z-index: 6;
+    width: 0;
+    height: 0;
+    transform: scale(0);
+    animation: pop .8s var(--ease-pop) var(--t-bow) forwards;
+}
+
+.bow__loop {
+    position: absolute;
+    top: -1.6em;
+    width: 4.4em;
+    height: 3.2em;
+    border: .9em solid var(--ribbon);
+    border-radius: 50%;
+}
+
+.bow__loop--left {
+    right: .2em;
+    transform: rotate(-18deg);
+}
+
+.bow__loop--right {
+    left: .2em;
+    transform: rotate(18deg);
+}
+
+.bow__tail {
+    position: absolute;
+    top: .3em;
+    width: 1.1em;
+    height: 5em;
+    background: linear-gradient(var(--ribbon), var(--ribbon-dark));
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+    transform-origin: 50% 0;
+}
+
+.bow__tail--left {
+    right: -.1em;
+    transform: rotate(22deg);
+}
+
+.bow__tail--right {
+    left: -.1em;
+    transform: rotate(-22deg);
+}
+
+.bow__knot {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    margin: -1em 0 0 -1em;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, var(--ribbon-light), var(--ribbon-dark));
+}
+
+/* ═══ Animaciones ═══ */
+
+@keyframes message-in {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+        filter: blur(4px);
+    }
+}
+
+@keyframes wrap-in {
+    from {
+        opacity: 0;
+        transform: translateY(3em);
+    }
+}
+
+@keyframes stem-grow {
+    to {
+        transform: rotate(var(--rot)) scaleY(1);
+    }
+}
+
+@keyframes leaf-open {
+    to {
+        transform: rotate(var(--ang)) scale(1);
+    }
+}
+
+@keyframes petal-open {
+    to {
+        transform: rotate(var(--a)) scale(1);
+    }
+}
+
+@keyframes bud-open {
+    to {
+        transform: rotate(var(--tilt)) scale(1);
+    }
+}

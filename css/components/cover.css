@@ -1,0 +1,129 @@
+.cover {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.cover--leaving {
+    pointer-events: none;
+    animation: cover-leave .8s ease-in forwards;
+}
+
+.cover__card {
+    width: 100%;
+    max-width: 20rem;
+    padding: 2.5rem 1.75rem 2rem;
+    text-align: center;
+    color: var(--night-soft);
+    background: linear-gradient(160deg, var(--paper), var(--paper-shade));
+    border-radius: 1.25rem;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 255, 255, .6);
+    animation: card-in .9s var(--ease-pop) both;
+}
+
+.cover__heart {
+    position: relative;
+    width: 3.2rem;
+    height: 2.9rem;
+    margin: 0 auto;
+    animation: heartbeat 1.4s ease-in-out infinite;
+}
+
+.cover__heart::before,
+.cover__heart::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 1.6rem;
+    height: 2.56rem;
+    background: var(--ribbon-light);
+    border-radius: 1.6rem 1.6rem 0 0;
+}
+
+.cover__heart::before {
+    left: 1.6rem;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.cover__heart::after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+.cover__title {
+    margin: 1.25rem 0 .25rem;
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.cover__hint {
+    margin: 0 0 1.5rem;
+    font-size: .95rem;
+    opacity: .75;
+}
+
+.cover__button {
+    appearance: none;
+    padding: .85rem 2.4rem;
+    border: 0;
+    border-radius: 999px;
+    color: #fff;
+    font: 600 1.05rem/1 var(--font-sans);
+    letter-spacing: .04em;
+    background: linear-gradient(135deg, #a774f2, var(--ribbon));
+    box-shadow: 0 .6rem 1.4rem rgba(142, 47, 192, .45);
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.cover__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .8rem 1.8rem rgba(142, 47, 192, .55);
+}
+
+.cover__button:active {
+    transform: translateY(1px);
+}
+
+.cover__button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+@keyframes card-in {
+    from {
+        opacity: 0;
+        transform: translateY(1.5rem) scale(.95);
+    }
+}
+
+@keyframes heartbeat {
+    0%,
+    30%,
+    100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.12);
+    }
+
+    45% {
+        transform: scale(1.08);
+    }
+}
+
+@keyframes cover-leave {
+    to {
+        opacity: 0;
+        transform: scale(1.08);
+    }
+}

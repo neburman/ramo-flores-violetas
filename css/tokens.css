@@ -1,0 +1,33 @@
+:root {
+    --night: #12071f;
+    --night-soft: #2a1146;
+    --text: #f5ecff;
+
+    --paper: #f6eefe;
+    --paper-shade: #dcc6f4;
+    --paper-back: #c7a8ee;
+    --paper-back-dark: #9f7ad6;
+
+    --ribbon: #8e2fc0;
+    --ribbon-light: #b45be0;
+    --ribbon-dark: #5e1a85;
+
+    --stem: #3c7a3a;
+    --stem-dark: #2b5a2a;
+    --leaf: #5a9e4f;
+    --gold: #f6d36b;
+    --gold-light: #fff1b8;
+    --gold-dark: #c9962e;
+
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-serif: Georgia, "Times New Roman", serif;
+
+    --ease-pop: cubic-bezier(.34, 1.56, .64, 1);
+
+    /* Línea de tiempo del ramo, desde que se pulsa «Abrir» */
+    --t-wrap: .1s;
+    --t-stem: 1.1s;
+    --t-bloom: 1s;
+    --t-bow: 3.3s;
+    --t-message: 3.7s;
+}
